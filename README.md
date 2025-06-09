@@ -125,8 +125,7 @@ sudo systemctl status mongod
 >正常運作會長這樣
 ![5-1-3 mongodb status](https://hackmd.io/_uploads/Bk7NGdbMel.png)
 
-#### 安裝 Open5GS
-##### 下載 Open5GS & UERANSIM 相關套件
+#### 安裝下載 Open5GS & UERANSIM 相關套件
 
 ``` shell=1
 sudo apt install cmake libfftw3-dev libmbedtls-dev libboost-program-options-dev libconfig++-dev libsctp-dev git
@@ -162,7 +161,7 @@ curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
 >會出現以下畫面，需耐心等待
 
 ![5-1-4 install open5gs webui](https://hackmd.io/_uploads/HJobUuWMeg.png)
-##### 註冊 UE 用戶
+#### 註冊 UE 用戶
 安裝完畢後，需要回到虛擬機中（此時不能依賴 SSH 連線，會失敗），在『**虛擬機**』 開啟瀏覽器並輸入`127.0.0.1:9999`，第一次開啟會需要稍等一下，若成功開啟後，就代表 Open5GS 有順利安裝成功，接著輸入預設密碼
 > Username: admin
 > Password: 1423
@@ -185,21 +184,21 @@ curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
 > AMF, SMF, UPF, NRF, UDM, UDR, PCF,AUSF, NSSF
 
 確認核心功能都啟用後，便可以開始設定核心網路的 amf, smf, upf功能了
-##### 1. 設定 amf.yaml
+#### 1. 設定 amf.yaml
 輸入`sudo vim /etc/open5gs/amf.yaml`編輯 amf，需要修改的如下
 > mcc、mnc:'001', '01'
 > Address:open5gs 的 hostonly IP
 
 ![5-1-9 amf](https://hackmd.io/_uploads/rkKp25f7lx.png)
 完成後輸入 `sudo systemctl restart open5gs-amfd.service` 重新啟動 amf
-##### 2. 設定 nrf.yaml
+#### 2. 設定 nrf.yaml
 輸入 `sudo vim /etc/open5gs/nrf.yaml` 編輯 nrf，需要修改的如下
 > PLMN ->mmc=001 mnc=01
 
 ![5-1-10 urf](https://hackmd.io/_uploads/SJ-109Gmxl.png)
 完成後輸入 `sudo systemctl restart open5gs-urfd.service` 重新啟動 urf
 
-##### 3. 設定 upf.yaml
+#### 3. 設定 upf.yaml
 輸入`sudo vim /etc/open5gs/upf.yaml`編輯 upf，需要修改的如下
 > 將 gtpu 的 IP 設定為核網 host only 的 IP
 
@@ -245,7 +244,7 @@ exit 0
 ------
 
 ### 5-2. 安裝與架設UERANSIM
-##### 前置作業
+#### 前置作業
 在安裝 UERANSIM 時會需要另一個獨立的虛擬機，不過現在不需要重新安裝一次 Ubuntu，只需要複製之前安裝的 Open5GS，並更改新虛擬機（UERANSIM）的網卡 MAC Address 即可，如下圖
 ![5-2-1 copy_vm](https://hackmd.io/_uploads/r1KF-sGQlx.png)
 > 右鍵選擇虛擬機（UERANSIM）>> Edit >> Network >> Shared Network && Host Only >> MAC Address >> Click Random >> Save
@@ -254,7 +253,7 @@ exit 0
 接著開啟 UERANSIM (登入密碼與open5gs虛擬機登入密碼一樣），並且開啟 terminal（這裡建議使用 SSH 連線，因為也會有需要大量複製的需求），為了後續方便辨識建議使用者將 UERANSIM 的 username 改為 ueransim，更改方法可以參考[ubuntu下修改主机名、用户名以及用户密码](https://https://blog.csdn.net/qq_34160841/article/details/106886306)的文章，將UERANSIM虛擬機的username改成這樣。
 ![5-2-3 rename vm](https://hackmd.io/_uploads/ByAGwsMXxx.png)
 
-##### 安裝UERANSIM
+#### 安裝UERANSIM
 - 把 UERANSIM 從 GitHub 上面抓下來
 ``` shell=1
 cd ~
@@ -294,7 +293,7 @@ make
 ![5-2-5 make success](https://hackmd.io/_uploads/H1RWQ2GQxl.png)
 
 
-##### 設定 UERANSIM
+#### 設定 UERANSIM
 - gNB 設定
 輸入`vim ~/UERANSIM/config/open5gs-gnb.yaml`編輯 gNB 設定，需要修改的如下
 >mcc、mcc修改為’001’和’01’
@@ -386,7 +385,7 @@ sudo iperf3 -s
 ```
 ![5-3-4 iperf3 -s](https://hackmd.io/_uploads/r1dVjNQmgx.png)
 > 輸入後會顯示以上結果
-##### TCP
+#### TCP
 - Uplink ICMP連線測試
 在 UERANSIM VM 中輸入以下指令，並請確認 `10.45.0.1` 是否為 Open5GS VM 中 `ogstun` 網卡的 IP，以及 `10.45.0.4` 是否為 UERANSIM VM 中 `uesimtun0` 的 IP。
 ``` shell=1
@@ -400,7 +399,7 @@ sudo iperf3 -c 10.45.0.1 -B 10.45.0.2 -b 100M -t 10 –R
 ![5-3-5 TCP conn](https://hackmd.io/_uploads/HkM1hNm7ex.png)
 > 如果順利連線會顯示上圖，左邊是 Open5GS VM，右邊是 UERANSIM VM
 
-##### UDP
+#### UDP
 - Uplink ICMP 連線測試
 ``` shell=1
 sudo iperf3 -c 10.45.0.1 -u -B 10.45.0.2 -b 100M -t 10 
