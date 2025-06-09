@@ -12,12 +12,13 @@
         - [問題與討論(二)](#問題與討論二)
     - [5-3 UERANSIM 外網測試](#5-3-ueransim-外網測試)
         - [問題與討論(三)](#問題與討論三)
- 
+------ 
 
 ## 1.實驗內容
 - 建立一個 5G 專網，架設 Open5GS 核心網路、gNB、UE
 - 學習如何模擬手機連線
 - 使用 Iperf3 進行 Downlink ICMP 和 Uplink ICMP 連線測試
+------
 
 ## 2. 相關知識
 - Open5GS:基於 3GPP 規範的 5G 核心網路 (5GC) 的開源軟體。 為建立和測試 5G 網路提供功能齊全且靈活的平台。 Open5GS 的關鍵元件包括：存取和行動管理功能(AMF)、會話管理功能(SMF)、使用者平面功能 (UPF)、網路儲存庫功能 (NRF)、服務能力暴露功能（SCEF）、訂閱者資料管理 (SDM)、統一資料管理（UDM）等。
@@ -31,7 +32,7 @@
     - 靈活的模式：與傳統的關聯式資料庫不同，MongoDB 不要求文件具有相同的結構或模式，這使得在開發過程中可以更靈活地進行模式設計和資料建模。這種靈活性使得 MongoDB 更適用於快速迭代和麵對變化的應用程式。
 
     - 分散式儲存：MongoDB 支援水平擴展，可以在多台伺服器之間分散數據，以應對大規模資料儲存的需求。
-
+------
 
 ## 3. 相關建置環境/設備規格
 ### [Ubuntu安裝](https://github.com/TTU-CWBT/Ubuntu-install-tutorial)
@@ -46,10 +47,14 @@ sudo apt install ubuntu-desktop
 | Open5gs  |  v2.7.1   |
 | UERANSIM |  v3.2.6   |
 
+------
+
 ## 4. 實驗架構
 - 目前架構都以 VM 進行
 - 核心網路：Open5GS
 - 模擬 Radio 訊號：UERANSIM
+
+------
 
 ## 5.實驗流程
 ### 5-0 前情提要
@@ -67,6 +72,8 @@ ssh open5gs@10.0.2.12
 > 如果發現找不到 IP，可以透過 `ip a` 查看 IP address
 > 如果沒有 IP address，可以輸入 `sudo dhclient` 來代管網卡，然後再次輸入 `ip a` 指令查看 IP
 > 如果連線不穩定，可以改用 Host Only 的 IP address
+
+------
 
 ### 5-1. 架設 Open5GS
 #### Ubuntu 基本套件安裝
@@ -226,11 +233,16 @@ exit 0
 ```
 
 設定完成後基本上就完成了核心網路的所有設定，接下來就則要設定 UE & RAN
+
+------
+
 ### 問題與討論（一）
 1. 截圖 Open5GS Web UI註冊成功畫面
 2. 解釋什麼是 IMSI 與 IPv4
 3. 請解釋 AMF, NRF, UPF, SMF分別負責什麼工作？
 4. 請解釋 AMF 中的 ngap 是什麼？
+
+------
 
 ### 5-2. 安裝與架設UERANSIM
 ##### 前置作業
@@ -320,9 +332,13 @@ sudo ./nr-ue -c ../config/open5gs-ue.yaml
 - 我們可以在open5GS VM 中輸入`sudo cat /var/log/open5gs/amf.log`，便可以觀察到 gNB 和 UE 連線資訊。
  ![5-2-10 amf log](https://hackmd.io/_uploads/rJVE22MXlx.png)
 
+------
+
 ### 問題與討論（二）
 1. 請截圖 gNB 與 UE 順利連接至 Open5GS 之畫面
 2. 請在 /var/log/open5gs/amf.log 找出 gNB 與 UE 成功連線的紀錄並截圖
+
+------
 
 ### 5-3. UERANSIM 外網測試
 :warning: **請維持 gNB 與 UE 與 Open5GS 間的正常連線**
@@ -395,6 +411,8 @@ sudo iperf3 -c 10.45.0.1 -u -B 10.45.0.2 -b 100M -t 10 –R
 ```
 ![5-3-6 UDP conn](https://hackmd.io/_uploads/H14PlHXQge.png)
 > 如果順利連線會顯示上圖，左邊是 Open5GS VM，右邊是 UERANSIM VM
+
+------
 
 ### 問題與討論（三）
 
