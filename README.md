@@ -163,7 +163,7 @@ curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
 
 ![5-1-4 install open5gs webui](https://hackmd.io/_uploads/HJobUuWMeg.png)
 ##### 註冊 UE 用戶
-安裝完畢後，需要回到虛擬機中（此時不能依賴 SSH 連線，會失敗），在**『虛擬機』** 開啟瀏覽器並輸入`127.0.0.1:9999`，第一次開啟會需要稍等一下，若成功開啟後，就代表 Open5GS 有順利安裝成功，接著輸入預設密碼
+安裝完畢後，需要回到虛擬機中（此時不能依賴 SSH 連線，會失敗），在『**虛擬機**』 開啟瀏覽器並輸入`127.0.0.1:9999`，第一次開啟會需要稍等一下，若成功開啟後，就代表 Open5GS 有順利安裝成功，接著輸入預設密碼
 > Username: admin
 > Password: 1423
 
@@ -369,8 +369,8 @@ traceroute google.com -i uesimtun0 -n
 ![5-3-3 traceroute](https://hackmd.io/_uploads/r1NSkQQQex.png)
 
 
-> :warning:如果沒有成功 ping 或是 tracetoute 都一直停在『* * * 』就是失敗，請在Open5GS VM重新輸入以下指令
-> :warning:在執行 `sudo iptables -t nat -A POSTROUTING -o enp0s1 -j MASQUERADE` 指令前，請特別確認 `enp0s1` 是否為 Open5GS VM 中對應 Shared Network 的網卡名稱。
+> :warning:如果沒有成功 ping 或是 tracetoute 都一直停在『* * * 』就是失敗，請在Open5GS VM重新輸入以下指令   
+> :warning:在執行 `sudo iptables -t nat -A POSTROUTING -o enp0s1 -j MASQUERADE` 指令前，請特別確認 `enp0s1` 是否為 Open5GS VM 中對應 Shared Network 的網卡名稱。   
 >
 >``` shell=1
 > sudo sysctl -w net.ipv4.ip_forward=1
