@@ -309,7 +309,7 @@ make
 > ![5-2-7 ue setting](https://hackmd.io/_uploads/B1nQpjzXgx.png)
 
 設定完成後，就可以開啟 gNB 與 UE 的模擬了
-- Turn on gNodeB
+- **Turn On** the gNodeB
 ``` shell=1
 cd ~/UERANSIM/build
 sudo ./nr-gnb -c ../config/open5gs-gnb.yaml
@@ -318,7 +318,7 @@ sudo ./nr-gnb -c ../config/open5gs-gnb.yaml
 > ![5-2-8 open gnb](https://hackmd.io/_uploads/HyQBOhMQge.png)
 
 
-- Trun on UE
+- **Trun on** the UE
 ``` shell=1
 cd ~/UERANSIM/build
 sudo ./nr-ue -c ../config/open5gs-ue.yaml 
