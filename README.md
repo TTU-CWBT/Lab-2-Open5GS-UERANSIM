@@ -397,7 +397,7 @@ sudo iperf3 -c 10.45.0.1 -B 10.45.0.4 -b 100M -t 10
 sudo iperf3 -c 10.45.0.1 -B 10.45.0.2 -b 100M -t 10 –R 
 ```
 ![5-3-5 TCP conn](https://hackmd.io/_uploads/HkM1hNm7ex.png)
-> 如果順利連線會顯示上圖，左邊是 Open5GS VM，右邊是 UERANSIM VM
+> 如果順利連線會顯示上圖，左邊是 Open5GS VM，右邊是 UERANSIM VM   
 :warning: **如果出現iperf3: error - unable to send control message: Bad gile descriptor那高機率是因為ueransim上面的ogstun網卡也在運作**   
 ![iperf3 error msg](./image/iperf3_error.png)   
 :warning:可以在ueransim VM中的ip a檢查ogstun是否有有ip addr，若有，就是他正在運作，**請將它關閉!!!**      
